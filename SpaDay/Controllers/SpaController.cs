@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SpaDay.Controllers
 {
+
+
     public class SpaController : Controller
     {
         public bool CheckSkinType(string skinType, string facialType)
@@ -42,10 +44,16 @@ namespace SpaDay.Controllers
         [Route("/spa")]
         public IActionResult Menu(string name, string skintype, string manipedi)
         {
+            ViewBag.person = name;
+            ViewBag.skintype = skintype;
+            ViewBag.maniped = manipedi;
+
             List<string> facials = new List<string>()
             {
                 "Microdermabrasion", "Hydrofacial", "Rejuvenating", "Enzyme Peel"
             };
+
+            
 
             List<string> appropriateFacials = new List<string>();
             for (int i = 0; i < facials.Count; i++)
@@ -55,6 +63,10 @@ namespace SpaDay.Controllers
                     appropriateFacials.Add(facials[i]);
                 }
             }
+
+            ViewBag.facial = appropriateFacials;
+
+
             return View();
         }
 
